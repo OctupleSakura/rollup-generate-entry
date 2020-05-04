@@ -1,0 +1,9 @@
+{
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "author": "octuplesakura@gmail.com",
+  "dependencies": {},
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^4.1.1"
+  }
+}
