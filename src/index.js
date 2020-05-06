@@ -5,7 +5,7 @@ const path = require('path')
 export default function GenerateEntry({
   target = '/dist', 
   root = '/src', 
-  exclude = ['index.tsx'],
+  exclude = [],
   namingRule
 }) {
 
