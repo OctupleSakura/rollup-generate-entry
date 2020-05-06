@@ -58,11 +58,11 @@ Type: `String`
 Default: '/src'  
 ### `exclude`
 Type: `Array<string>`  
-Default: \['componentA'\]   
+Default: \[\]   
 
 Ignore some folder in component directory
 ### `namingRule`  
-Type: `String`
+Type: `String`  
 Default: ''  
 
 The naming rules of export component
