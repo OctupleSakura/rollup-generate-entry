@@ -58,5 +58,6 @@ Type: `String`
 Default: '/src'  
 ### `exclude`
 Type: `Array<string>`  
-Default: \['componentA'\]  
+Default: \['componentA'\]   
+
 Ignore some folder in component directory
