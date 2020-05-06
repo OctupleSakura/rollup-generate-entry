@@ -2,15 +2,16 @@
 const fs = require('fs')
 const path = require('path')
 
-export default function GenerateEntry() {
+export default function GenerateEntry({
+  target = '/dist', 
+  root = '/src', 
+  exclude = ['index.tsx'],
+  namingRule
+}) {
 
   return {
     name: 'rollup-generate-entry',
-    generateBundle({
-      target = '/dist', 
-      root = '/src', 
-      exclude = ['index.tsx']
-    }) {
+    generateBundle() {
 
       const targetPath = path.join(__dirname, `/${target}`)
       const rootPath = path.join(__dirname, `/${root}`)
@@ -19,14 +20,23 @@ export default function GenerateEntry() {
         throw `Directory ${target} not found`
       }
 
-      const files = fs.readdirSync(rootPath).filter(val => exclude.indexOf(val) === -1)
+      const files = fs.readdirSync(rootPath).filter(val => {
+        return exclude.indexOf(val) === -1 && fs.lstatSync(rootPath + '\\' + val).isDirectory()
+      })
       
       let entryScript = ''
 
-      const toCamelCaseVar = variable => 
-        variable.replace(/(\_|\-)+[a-zA-Z]/g,
-          (str, index) => index ? str.substr(-1).toUpperCase() : str
+      const toCamelCaseVar = variable => {
+        let word = variable.replace(/(\_|\-)+[a-zA-Z]/g,
+          (str, index) => index >= 0 ? str.substr(-1).toUpperCase() : str
         )
+        if(namingRule === 'upper') {
+          word = word.replace(/^[a-zA-Z]/g, 
+            (str, index) => index >= 0 ? str.toUpperCase() : str
+          )
+        }
+        return word
+      }
 
       for(const i of files) {
         const camelName = toCamelCaseVar(i)

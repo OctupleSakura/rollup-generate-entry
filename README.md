@@ -61,3 +61,8 @@ Type: `Array<string>`
 Default: \['componentA'\]   
 
 Ignore some folder in component directory
+### `namingRule`  
+Type: `String`
+Default: ''  
+
+The naming rules of export component
